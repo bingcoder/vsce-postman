@@ -6,17 +6,18 @@
   "version": "1.0.0",
   "icon": "media/icon.svg",
   "keywords": ["postman"],
+  "publisher": "breaking-point",
   "engines": {
     "vscode": "^1.55.0"
   },
   "repository": {
     "type": "git",
-    "url":"https://github.com/breaking-point/vsce-postman.git"
+    "url":"https://github.com/breaking-point/vsce-postman"
   },
   "bugs": {
     "url": "https://github.com/breaking-point/vsce-postman/issues"
   },
-  "homepage": "https://github.com/breaking-point/vsce-postman.git",
+  "homepage": "https://github.com/breaking-point/vsce-postman",
   "galleryBanner": {
     "color": "#0273D4",
     "theme": "dark"
