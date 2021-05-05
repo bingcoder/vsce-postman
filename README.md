@@ -1,2 +1,5 @@
-# vsce-postman
-vs code extension postman
+# vsc-postman README
+
+## Features
+
+易用的 postman

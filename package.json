@@ -1,0 +1,135 @@
+{
+  "name": "vsc-postman",
+  "displayName": "vsc-postman",
+  "description": "vscode postman extension",
+  "license": "MIT",
+  "version": "1.0.0",
+  "icon": "media/icon.svg",
+  "keywords": ["postman"],
+  "engines": {
+    "vscode": "^1.55.0"
+  },
+  "repository": {
+    "type": "git",
+    "url":"https://github.com/breaking-point/vsce-postman.git"
+  },
+  "bugs": {
+    "url": "https://github.com/breaking-point/vsce-postman/issues"
+  },
+  "homepage": "https://github.com/breaking-point/vsce-postman.git",
+  "galleryBanner": {
+    "color": "#0273D4",
+    "theme": "dark"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:vsc-postman-side"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "VscPostman",
+      "properties": {
+        "vscPostman.history": {
+          "type": "array",
+          "default": []
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "vscPostman.new",
+        "title": "Add",
+        "icon": "$(add)"
+      },
+      {
+        "command": "vscPostmanHistory.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "vscPostmanHistory.newWindow",
+        "title": "Open in New Window",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "vscPostmanHistory.delete",
+        "title": "Delete",
+        "icon": "$(trash)"
+      }
+    
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "vscPostman.new",
+          "when": "view == vsc-postman-side",
+          "group": "navigation"
+        },
+        {
+          "command": "vscPostmanHistory.refresh",
+          "when": "view == vsc-postman-side",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "vscPostmanHistory.newWindow",
+          "when": "view == vsc-postman-side",
+          "group": "inline"
+        },
+        {
+          "command": "vscPostmanHistory.delete",
+          "when": "view == vsc-postman-side",
+          "group": "inline"
+        }
+      ]
+    },
+    "views": {
+      "vsc-postman": [
+        {
+          "id": "vsc-postman-side",
+          "name": "History"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "icon": "media/rocket.svg",
+          "id": "vsc-postman",
+          "title": "Postman"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "test-compile": "tsc -p ./",
+    "test-watch": "tsc -watch -p ./",
+    "pretest": "yarn run test-compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.55.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "eslint": "^7.19.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "glob": "^7.1.6",
+    "mocha": "^8.2.1",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0",
+    "ts-loader": "^8.0.14",
+    "webpack": "^5.19.0",
+    "webpack-cli": "^4.4.0"
+  }
+}
