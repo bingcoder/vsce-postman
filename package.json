@@ -4,7 +4,7 @@
   "description": "vscode postman extension",
   "license": "MIT",
   "version": "1.0.0",
-  "icon": "media/icon.svg",
+  "icon": "media/icon.png",
   "keywords": ["postman"],
   "publisher": "breaking-point",
   "engines": {
