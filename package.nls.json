@@ -1,0 +1,8 @@
+{
+  "ext.command.add": "Add",
+  "ext.command.addFolder": "Add Folder",
+  "ext.command.delete": "Delete",
+  "ext.command.refresh": "Refresh",
+  "ext.command.rename": "Rename",
+  "ext.command.showHistory": "Show History"
+}

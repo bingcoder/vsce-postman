@@ -1,0 +1,154 @@
+body {
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+  font-weight: var(--vscode-editor-font-family);
+  .split {
+    height: 100%;
+  }
+  .postman-form,
+  .response {
+    overflow: hidden auto;
+  }
+  .postman-form {
+    padding: 20px 20px 0;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .response {
+    .ant-tabs-nav {
+      padding: 0 20px;
+    }
+    .ant-tabs-content-holder {
+      flex: 1;
+      overflow: auto;
+    }
+    .ant-tabs-content,
+    .ant-tabs-tabpane {
+      height: 100%;
+    }
+    .monaco-editor .margin {
+      background: transparent;
+    }
+    .monaco-editor,
+    .monaco-editor-background {
+      background: transparent;
+    }
+    .ant-empty {
+      margin: 0;
+      padding-top: 32px;
+    }
+  }
+  .ant-tabs-tab {
+    padding-top: 0;
+  }
+}
+
+.editable-row {
+  td {
+    padding: 0 1px !important;
+  }
+  textarea.ant-input {
+    transition: box-shadow 0.3s, height 0s;
+  }
+  .ant-input,
+  .ant-select {
+    &:not(.ant-input[disabled]) {
+      &:hover,
+      &:focus {
+        box-shadow: 0 0 0 1px #3c89e8;
+      }
+    }
+  }
+  .ant-select-focused {
+    box-shadow: 0 0 0 1px #3c89e8;
+  }
+}
+
+.postman-form,
+.group-setting {
+  .ant-table-footer {
+    padding: 0 !important;
+    button {
+      padding: 2px 6px;
+      height: auto;
+    }
+  }
+
+  .ant-table-placeholder {
+    td {
+      padding: 0 !important;
+      height: 31px;
+    }
+  }
+  .ant-table-expanded-row-fixed {
+    padding: 5px !important;
+  }
+
+  .ant-select-dropdown .ant-select-item-empty {
+    padding: 0;
+  }
+}
+
+.editable-table {
+  .ant-table {
+    border-radius: 0 !important;
+  }
+  .editable-header-table {
+    tbody {
+      display: none;
+    }
+  }
+  tbody {
+    .ant-table-placeholder {
+      display: none;
+    }
+  }
+
+  .editable-group-table,
+  .editable-content-table {
+    .ant-table-content > table {
+      border-top: none !important;
+    }
+  }
+  .editable-group-table {
+    .ant-table-container {
+      border-radius: 0 !important;
+    }
+  }
+  .editable-content-table {
+    .ant-table-container {
+      border-start-start-radius: 0 !important;
+      border-start-end-radius: 0 !important;
+    }
+  }
+}
+
+.gutter.gutter-vertical {
+  transition: background-color 0.3s ease-in-out;
+  &:hover {
+    background-color: #007fd4;
+  }
+  cursor: row-resize;
+}
+
+.group-setting {
+  .editable-group-table {
+    display: none !important;
+  }
+}
+
+.request-info {
+  .ant-collapse-content-box {
+    padding-block: 0 !important;
+    padding: 0 0 0 40px !important;
+  }
+}
+
+// dev
+body {
+  background-color: black;
+}

@@ -1,0 +1,8 @@
+{
+  "ext.command.add": "新增",
+  "ext.command.addDirectory": "新增文件夹",
+  "ext.command.delete": "删除",
+  "ext.command.refresh": "刷新",
+  "ext.command.rename": "重命名",
+  "ext.command.showHistory": "打开历史文件"
+}

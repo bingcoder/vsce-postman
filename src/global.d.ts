@@ -8,5 +8,5 @@ declare interface HistoryItem {
 }
 declare interface Message {
   type: string;
-  value: any
+  value: string;
 }
