@@ -47,6 +47,7 @@ class PostmanDataProvider {
         this._onDidChangeTreeData = new vscode.EventEmitter();
         this.onDidChangeTreeData = this._onDidChangeTreeData.event;
         this.records = [];
+        this.context = context;
         const globalStoragePath = context.globalStorageUri.fsPath;
         this.historyPath = path.join(globalStoragePath, historyFileName);
         const exist = fs.existsSync(globalStoragePath);
@@ -81,11 +82,25 @@ class PostmanDataProvider {
     getChildren(element) {
         return this.records.filter((item) => element ? item.pk === element.k : item.pk === null);
     }
+    getFileIconPath(element) {
+        if (element.method) {
+            return `${this.context.extensionPath}/media/${element.method}.png`;
+        }
+        return new vscode.ThemeIcon('file');
+    }
+    getFileTooltip(element) {
+        if (element.ft === vscode.FileType.File && element.url) {
+            return `${element.url}`;
+        }
+    }
     getTreeItem(element) {
         const type = element.ft === vscode.FileType.File ? 'file' : 'file-directory';
         const treeItem = {
             label: `${element.title}`,
-            iconPath: new vscode.ThemeIcon(type),
+            tooltip: this.getFileTooltip(element),
+            iconPath: element.ft === vscode.FileType.File
+                ? this.getFileIconPath(element)
+                : new vscode.ThemeIcon('file-directory'),
             collapsibleState: element.ft === vscode.FileType.Directory
                 ? vscode.TreeItemCollapsibleState.Collapsed
                 : vscode.TreeItemCollapsibleState.None,
@@ -251,10 +266,7 @@ class PostmanView {
         };
         this.getGroupData = (item) => {
             let current = item;
-            while (current === null || current === void 0 ? void 0 : current.pk) {
-                current = this.treeDataProvider.records.find((record) => record.k === current.pk);
-            }
-            return current === item ? null : current;
+            return this.treeDataProvider.records.find((record) => record.k === current.pk);
         };
         this.context = context;
         this.historyPath = path.join(context.globalStorageUri.fsPath, historyFileName);
@@ -265,7 +277,7 @@ class PostmanView {
             dragAndDropController: this,
         });
         context.subscriptions.push(this.view);
-        vscode.commands.registerCommand('vscPostman.refresh', () => this.treeDataProvider.refresh);
+        vscode.commands.registerCommand('vscPostman.refresh', () => this.treeDataProvider.refresh());
         vscode.commands.registerCommand('vscPostman.showHistory', () => {
             if (fs.existsSync(this.historyPath)) {
                 vscode.window.showTextDocument(vscode.Uri.file(this.historyPath));

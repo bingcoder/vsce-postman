@@ -10,6 +10,8 @@ class TreeItemFile {
   ft = vscode.FileType.File;
   title: string;
   pk: string | null;
+  method?: string;
+  url?: string;
   constructor(config: Pick<TreeItem, 'pk' | 'title'>) {
     this.title = config.title;
     this.pk = config.pk;
@@ -41,7 +43,9 @@ class PostmanDataProvider implements vscode.TreeDataProvider<TreeItem> {
 
   records: TreeItem[] = [];
   historyPath: string;
+  context: vscode.ExtensionContext;
   constructor(context: vscode.ExtensionContext) {
+    this.context = context;
     const globalStoragePath = context.globalStorageUri.fsPath;
     this.historyPath = path.join(globalStoragePath, historyFileName);
     const exist = fs.existsSync(globalStoragePath);
@@ -84,13 +88,28 @@ class PostmanDataProvider implements vscode.TreeDataProvider<TreeItem> {
     );
   }
 
+  getFileIconPath(element: TreeItemFile) {
+    if (element.method) {
+      return `${this.context.extensionPath}/media/${element.method}.png`;
+    }
+    return new vscode.ThemeIcon('file');
+  }
+  getFileTooltip(element: TreeItemFile) {
+    if (element.ft === vscode.FileType.File && element.url) {
+      return `${element.url}`;
+    }
+  }
+
   getTreeItem(element: TreeItem) {
     const type =
       element.ft === vscode.FileType.File ? 'file' : 'file-directory';
-
     const treeItem: vscode.TreeItem = {
       label: `${element.title}`,
-      iconPath: new vscode.ThemeIcon(type),
+      tooltip: this.getFileTooltip(element),
+      iconPath:
+        element.ft === vscode.FileType.File
+          ? this.getFileIconPath(element)
+          : new vscode.ThemeIcon('file-directory'),
       collapsibleState:
         element.ft === vscode.FileType.Directory
           ? vscode.TreeItemCollapsibleState.Collapsed
@@ -134,9 +153,8 @@ class PostmanView implements vscode.TreeDragAndDropController<TreeItem> {
     });
 
     context.subscriptions.push(this.view);
-    vscode.commands.registerCommand(
-      'vscPostman.refresh',
-      () => this.treeDataProvider.refresh
+    vscode.commands.registerCommand('vscPostman.refresh', () =>
+      this.treeDataProvider.refresh()
     );
     vscode.commands.registerCommand('vscPostman.showHistory', () => {
       if (fs.existsSync(this.historyPath)) {
@@ -411,12 +429,9 @@ class PostmanView implements vscode.TreeDragAndDropController<TreeItem> {
 
   getGroupData = (item: TreeItemFile) => {
     let current = item;
-    while (current?.pk) {
-      current = this.treeDataProvider.records.find(
-        (record) => record.k === current.pk
-      )!;
-    }
-    return current === item ? null : current;
+    return this.treeDataProvider.records.find(
+      (record) => record.k === current.pk
+    )!;
   };
 }
 

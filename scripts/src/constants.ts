@@ -42,7 +42,7 @@ export const methods = [
   'POST',
   'PUT',
   'DELETE',
-  'PATCH',
   'OPTIONS',
   'HEAD',
+  'PATCH',
 ];

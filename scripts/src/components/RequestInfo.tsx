@@ -49,7 +49,7 @@ const RequestInfo: React.FC = () => {
       {({ getFieldsValue }) => {
         const value = getFieldsValue();
         const { config } = handleConfig(value);
-        console.log(config, value);
+        // console.log(config, value);
         const { method, baseURL, url, headers, data } = config;
         const searchParams = new URLSearchParams(config.params);
         const queryString = searchParams.toString();

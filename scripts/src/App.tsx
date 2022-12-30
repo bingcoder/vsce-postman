@@ -67,14 +67,8 @@ const App: React.FC = () => {
   }, [theme]);
 
   useEffect(() => {
-    const group =
-      groupEnv?.find((item) => item.title === env) || defaultGroupEnv;
-    // form.resetFields([
-    //   ['group', AuthType.Basic],
-    //   ['group', AuthType.Bearer],
-    // ]);
+    const group = groupEnv?.find((item) => item.title === env);
     const authorization = getAuthorization(group, currentRecord.current);
-    console.log(authorization);
     form.resetFields(['group']);
     form.setFieldsValue({
       group,
@@ -86,7 +80,6 @@ const App: React.FC = () => {
 
   const handleReceiveResponseFromRequest = (data: any) => {
     const { value } = data;
-    console.log(value.requestId, requestId, value.requestId === requestId);
     if (value.requestId !== requestId) return;
     setResponse(value);
     setRequestId(0);
@@ -322,7 +315,7 @@ const App: React.FC = () => {
                         </Form.Item>
                       </>
                     }
-                    placeholder='请输入地址以"/"开始'
+                    placeholder="请输入地址"
                   />
                 </Form.Item>
               </Col>

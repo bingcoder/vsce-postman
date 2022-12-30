@@ -52,10 +52,6 @@ const AuthParams: React.FC = () => {
         const groupBasic = getFieldValue(['group', AuthType.Basic]);
         const groupBearer = getFieldValue(['group', AuthType.Bearer]);
         const haveGroupAuth = !!(groupBasic || groupBearer);
-        console.log(
-          getFieldValue(['group', AuthType.Bearer]),
-          getFieldValue(['group', AuthType.Basic])
-        );
 
         return (
           <ConfigProvider componentDisabled={haveGroupAuth}>
