@@ -1,9 +1,10 @@
 # vsc-postman README
 
-## Features
+⚠️ Deprecated
 
-易用的 postman
+Please use the official extension.
 
-github: https://github.com/breaking-point/vsce-postman
+请使用官方插件。
 
-## 欢迎提出需求和issue😌
+https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode
+
